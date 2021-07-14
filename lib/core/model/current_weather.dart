@@ -236,9 +236,9 @@ class Wind {
     double gust;
 
     factory Wind.fromJson(Map<String, dynamic> json) => Wind(
-        speed: json["speed"].toDouble(),
+        speed: json["speed"],
         deg: json["deg"],
-        gust: json["gust"].toDouble(),
+        gust: json["gust"],
     );
 
     Map<String, dynamic> toJson() => {

@@ -10,9 +10,9 @@ class TodayWeather extends StatelessWidget {
   final CurrentWeather todayModel;
   // final List<Weather> weather;
   TodayWeather({this.todayModel});
-  DateTime date = formatTime(
-      DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
-      
+  // DateTime date = formatTime(
+  //     DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
+
   @override
   // ignore: missing_return
   Widget build(BuildContext context) {
@@ -41,11 +41,11 @@ class TodayWeather extends StatelessWidget {
                             style:
                                 TextStyle(fontSize: 20, color: AppColors.white),
                           ),
-                          Text(
-                            '${formatDayMonth(dateTime.toString() )}',
-                            style:
-                                TextStyle(fontSize: 10, color: AppColors.white),
-                          ),
+                          // Text(
+                          //   '${formatDayMonth(dateTime.toString() )}',
+                          //   style:
+                          //       TextStyle(fontSize: 10, color: AppColors.white),
+                          // ),
                           SizedBox(
                             height: sizeBoxValue(context) * 2,
                           ),
@@ -69,10 +69,10 @@ class TodayWeather extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
-                        Text(date.hour.toInt() < 12  ? todayModel.main.tempMin.toString() : todayModel.main.tempMax.toString(),
-                          style:
-                              TextStyle(fontSize: 40, color: AppColors.white),
-                        ),
+                        // Text(date.hour.toInt() < 12  ? todayModel.main.tempMin : todayModel.main.tempMax.toString(),
+                        //   style:
+                        //       TextStyle(fontSize: 40, color: AppColors.white),
+                        // ),
                         Text(
                           '°C',
                           style:

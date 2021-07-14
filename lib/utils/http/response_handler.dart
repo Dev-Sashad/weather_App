@@ -8,7 +8,7 @@ handleResponse(http.Response response) {
     print('ResponseCode:: ${response.statusCode},   ResponseBody:: ${response.body}');
 
     final int code = response.statusCode;
-    final dynamic body = json.decode(response.body);
+    final dynamic body = response.body;
     if(code == 200 || code == 201) {
       return SuccessModel(body);
     }
