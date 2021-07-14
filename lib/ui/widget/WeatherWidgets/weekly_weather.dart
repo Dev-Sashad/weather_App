@@ -10,8 +10,8 @@ import 'package:weather_icons/weather_icons.dart';
 class WeeklyWeather extends StatelessWidget {
   final CurrentWeather weeklyModel;
   WeeklyWeather({this.weeklyModel});
-  DateTime date = formatTime(
-      DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
+  // DateTime date = formatTime(
+  //     DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
   @override
   Widget build(BuildContext context) {
     DateTime dateTime =
@@ -37,7 +37,7 @@ class WeeklyWeather extends StatelessWidget {
                     style: TextStyle(fontSize: 20, color: AppColors.white),
                   ),
                   Text(
-                    '${formatDayMonth(dateTime.toString())}',
+                    '${formatDayMonth(dateTime)}',
                     style: TextStyle(fontSize: 10, color: AppColors.white),
                   ),
                   SizedBox(
@@ -62,7 +62,7 @@ class WeeklyWeather extends StatelessWidget {
             padding: EdgeInsets.only(left: 20),
             child: Row(
               children: [
-                Text(date.hour.toInt() < 12  ? weeklyModel.main.tempMin.toString() : weeklyModel.main.tempMax.toString(),
+                Text( weeklyModel.main.tempMax.toString(),
                   style: TextStyle(fontSize: 40, color: AppColors.white),
                 ),
                 Text(
@@ -82,8 +82,8 @@ class WeeklyWeather extends StatelessWidget {
 class WeeklyWeatherTile extends StatelessWidget {
   final Daily weeklyModel;
   WeeklyWeatherTile({this.weeklyModel});
-  DateTime date = formatTime(
-      DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
+  // DateTime date = formatTime(
+  //     DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
   @override
   Widget build(BuildContext context) {
     DateTime dateTime =
@@ -105,7 +105,7 @@ class WeeklyWeatherTile extends StatelessWidget {
               size: 30,
               color: AppColors.grey,
             ),
-            Text('${formatDay(dateTime.toString()).toString()}',
+            Text('${formatDay(dateTime)}',
                 style: TextStyle(fontSize: 15, color: AppColors.grey)),
             Text(
                 '${weeklyModel.temp.morn.toString()} °/° ${weeklyModel.temp.eve.toString()}',

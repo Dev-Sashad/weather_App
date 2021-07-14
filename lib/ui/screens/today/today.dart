@@ -24,9 +24,7 @@ class Today extends StatelessWidget {
                 image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover,
               )),
-              child:
-                             TodayWeather(
-                              todayModel:model.currentWeather)
+              child: TodayWeather(todayModel:model.currentWeather)
 
 
             ),

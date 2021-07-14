@@ -32,7 +32,7 @@ class WeatherApiService extends BaseModel {
         WeatherData postList = WeatherData.fromJson(data);
         return ErrorModel(postList);
       }
-      print('OGAHELP:::::::::::::::::');
+      print('goooal');
       var data = json.decode(result.data);
       WeatherData weatherList = WeatherData.fromJson(data);
       return weatherList;
@@ -52,14 +52,12 @@ class WeatherApiService extends BaseModel {
         showErrorToast('Fetch failed');
         print(result.error);
         var data = result.error;
-        CurrentWeather postList = CurrentWeather.fromJson(data);
+       CurrentWeather postList = CurrentWeather.fromJson(data);
         return ErrorModel(postList);
       }
         var data = json.decode(result.data);
 
-        print('HELP:::::::::::::::::');
-
-        //CurrentWeather weatherList = CurrentWeather.fromJson(data);
+        print('goooooal');
         return SuccessModel(result.data);
        } catch (e) {
       print(e.toString());

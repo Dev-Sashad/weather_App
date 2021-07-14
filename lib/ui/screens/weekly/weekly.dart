@@ -10,6 +10,10 @@ class Weekly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<WeeklyViewModel>.withConsumer(
+      onModelReady: (v){
+        v.fetchCurrent();
+        v.fetchData();
+      },
         viewModelBuilder: () => WeeklyViewModel(),
         builder: (context, model, child) {
           return Scaffold(
@@ -19,46 +23,20 @@ class Weekly extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.indigo[900]),
                   child: Stack(
                     children: [
-                      FutureBuilder<CurrentWeather>(
-                          future: model.fetchCurrent(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                
-                                    return WeeklyWeather(weeklyModel: snapshot.data);
-                                  
-                            } else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(
-                                "An Error Occured",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                              ));
-                            }
+                      WeeklyWeather(weeklyModel: model.currentWeather),
 
-                            return Center(
-                                child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                    )));
-                          }),
-                      FutureBuilder<WeatherData>(
+                      FutureBuilder<List<Daily>>(
                           future: model.fetchData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
-                              return ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data.daily.length,
-                                  itemBuilder: (context, index) {
-                                    Daily data = snapshot.data.daily[index];
+                             
                                     return Positioned(
                                         top: height(0.65, context),
-                                        child: WeeklyWeatherTile(
-                                            weeklyModel: data));
-                                  });
+                                        child: ListView(
+                                shrinkWrap: true,
+                                children: model.dailyData
+                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed))
+                                    .toList()));
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text(

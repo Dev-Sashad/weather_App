@@ -10,12 +10,12 @@ import 'package:weather/utils/locator.dart';
 
 class TodayViewModel extends BaseModel {
   
-  final WeatherApiService _movies= locator<WeatherApiService>();
+  final WeatherApiService _data= locator<WeatherApiService>();
   CurrentWeather currentWeather;
 
   fetchCurrent() async {
      //setBusy(true);
-     var result = await _movies.getCurrent();
+     var result = await _data.getCurrent();
      if (result is ErrorModel) {
        print('ERROR:::::::');
        // showToast('Login failed');
@@ -24,6 +24,8 @@ class TodayViewModel extends BaseModel {
        throw Exception('Failed to load internet');
        //return ErrorModel(result.error);
      }
+     
+     
      if (result is SuccessModel) {
        print('ASASAS');
        print(json.decode(result.data));

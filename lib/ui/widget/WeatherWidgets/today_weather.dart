@@ -10,14 +10,9 @@ class TodayWeather extends StatelessWidget {
   final CurrentWeather todayModel;
   // final List<Weather> weather;
   TodayWeather({this.todayModel});
-  // DateTime date = formatTime(
-  //     DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
-
   @override
-  // ignore: missing_return
   Widget build(BuildContext context) {
-    // var uv = ((280 * todayModel.clouds.all * todayModel.sys.type)/25).ceil();
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
+    // DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
         return Stack(
           children: [
             Container(
@@ -42,7 +37,7 @@ class TodayWeather extends StatelessWidget {
                                 TextStyle(fontSize: 20, color: AppColors.white),
                           ),
                           Text(
-                            '${formatDayMonth(dateTime.toString() )}',
+                            formatDayMonth(DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000)).toString(),
                             style:
                                 TextStyle(fontSize: 10, color: AppColors.white),
                           ),
@@ -69,10 +64,10 @@ class TodayWeather extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
-                        // Text(date.hour.toInt() < 12  ? todayModel.main.tempMin : todayModel.main.tempMax.toString(),
-                        //   style:
-                        //       TextStyle(fontSize: 40, color: AppColors.white),
-                        // ),
+                        Text( todayModel.main.tempMax.toString(),
+                          style:
+                              TextStyle(fontSize: 40, color: AppColors.white),
+                        ),
                         Text(
                           '°C',
                           style:
