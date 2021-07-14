@@ -1,5 +1,8 @@
 
+import 'dart:convert';
+
 import 'package:weather/core/model/baseModel.dart';
+import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/core/model/error_model.dart';
 import 'package:weather/core/model/weather_model.dart';
 import 'package:weather/utils/helpers.dart';
@@ -9,7 +12,7 @@ import 'package:weather/utils/http/paths.dart';
 import 'index.dart';
 
 class WeatherApiService extends BaseModel{
-
+// getting data for daily weather info
   getData() async {
     try {
       final result = await http.get(Paths.pathUrl + Paths.lat + lat + Paths.lon + lon + Paths.units + Paths.exclude + Paths.completeApi + apiKey);
@@ -18,13 +21,13 @@ class WeatherApiService extends BaseModel{
         showErrorToast('Fetch failed');
         print(result.error);
         var data = result.error;
-        Welcome postList = Welcome.fromJson(data);
+        WeatherData  postList = WeatherData.fromJson(data);
          return ErrorModel(postList);
 
       }
 
-      var data = result.data; 
-      Welcome weatherList = Welcome.fromJson(data);   
+      var data = json.decode(result.body);
+     WeatherData  weatherList = WeatherData.fromJson(data);   
       return weatherList;
     } catch (e) {
       print(e.toString());
@@ -32,6 +35,7 @@ class WeatherApiService extends BaseModel{
     }
   }
 
+// getting data for curret weather info
   getCurrent() async{
     try{
     final result = await http.get(Paths.currentPath+ state+ Paths.units + Paths.completeApi + apiKey);
@@ -40,13 +44,13 @@ class WeatherApiService extends BaseModel{
         showErrorToast('Fetch failed');
         print(result.error);
         var data = result.error;
-        Welcome postList = Welcome.fromJson(data);
+        CurrentWeather   postList = CurrentWeather.fromJson(data);
          return ErrorModel(postList);
 
       }
 
-      var data = result.data; 
-      Welcome weatherList = Welcome.fromJson(data);   
+      var data = json.decode(result.body); 
+      CurrentWeather  weatherList = CurrentWeather.fromJson(data);   
       return weatherList;
     } catch (e) {
       print(e.toString());

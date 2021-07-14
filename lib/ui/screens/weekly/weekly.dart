@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
+import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/core/model/weather_model.dart';
 import 'package:weather/ui/widget/WeatherWidgets/weekly_weather.dart';
 import 'package:weather/utils/constants/screensizer.dart';
@@ -18,11 +19,13 @@ class Weekly extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.indigo[900]),
                   child: Stack(
                     children: [
-                      FutureBuilder<Welcome>(
+                      FutureBuilder<CurrentWeather>(
                           future: model.fetchCurrent(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
-                              WeeklyWeather(weeklyModel: snapshot.data);
+                
+                                    return WeeklyWeather(weeklyModel: snapshot.data);
+                                  
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text(
@@ -42,14 +45,20 @@ class Weekly extends StatelessWidget {
                                       backgroundColor: Colors.white,
                                     )));
                           }),
-                      FutureBuilder<Welcome>(
+                      FutureBuilder<WeatherData>(
                           future: model.fetchData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
-                              Positioned(
-                                  top: height(0.65, context),
-                                  child: WeeklyWeatherTile(
-                                      weeklyModel: snapshot.data));
+                              return ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data.daily.length,
+                                  itemBuilder: (context, index) {
+                                    Daily data = snapshot.data.daily[index];
+                                    return Positioned(
+                                        top: height(0.65, context),
+                                        child: WeeklyWeatherTile(
+                                            weeklyModel: data));
+                                  });
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text(

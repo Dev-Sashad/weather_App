@@ -67,9 +67,9 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
                   );
                 },
           tabs: [
-              TabBarWidget(selectedIndex == items.indexOf(items.elementAt(0)), item: items.elementAt(0)),
-              TabBarWidget(selectedIndex == items.indexOf(items.elementAt(1)), item: items.elementAt(1)),
-              TabBarWidget(selectedIndex == items.indexOf(items.elementAt(2)), item: items.elementAt(2)),
+              _buildItem(selectedIndex == items.indexOf(items.elementAt(0)),  items.elementAt(0)),
+              _buildItem(selectedIndex == items.indexOf(items.elementAt(1)), items.elementAt(1)),
+              _buildItem(selectedIndex == items.indexOf(items.elementAt(2)), items.elementAt(2)),
           ]
           ),
         ),
@@ -88,6 +88,27 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
           ),
    );
         }
+    );
+  }
+
+   Widget _buildItem( bool isSelected, NavigationItem item){
+     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(icon: Icon(item.icon, size: 30,color: isSelected? Colors.blue: Colors.black,),
+                           onPressed: (){}),
+       
+        Text(
+          item.title,
+          style: TextStyle(
+              color: isSelected? Colors.blue: Colors.black,
+              fontFamily: 'Caros',
+              fontSize: 17.0,
+              fontWeight: FontWeight.w600),
+        )
+      ],
     );
   }
 }

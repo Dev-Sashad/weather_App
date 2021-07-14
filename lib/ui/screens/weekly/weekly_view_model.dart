@@ -1,4 +1,5 @@
 import 'package:weather/core/model/baseModel.dart';
+import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/core/model/error_model.dart';
 import 'package:weather/core/model/weather_model.dart';
 import 'package:weather/core/services/api_service.dart';
@@ -10,9 +11,9 @@ class WeeklyViewModel extends BaseModel {
   final WeatherApiService _movies= locator<WeatherApiService>();
 
 
-  Future<Welcome> fetchData() async {
+  Future<WeatherData> fetchData() async {
     //setBusy(true);
-    var result = await _movies.getCurrent();
+    var result = await _movies.getData();
     if (result is ErrorModel) {
       print(result.error);
       notifyListeners();
@@ -25,7 +26,7 @@ class WeeklyViewModel extends BaseModel {
 
 
 
-   Future<Welcome> fetchCurrent() async {
+   Future<CurrentWeather> fetchCurrent() async {
     //setBusy(true);
     var result = await _movies.getCurrent();
     if (result is ErrorModel) {

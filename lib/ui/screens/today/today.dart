@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
-import 'package:weather/core/model/weather_model.dart';
+import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/ui/widget/WeatherWidgets/today_weather.dart';
 import 'package:weather/utils/constants/screensizer.dart';
 import 'today_view_model.dart';
-
 
 class Today extends StatelessWidget {
   // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
@@ -19,44 +18,36 @@ class Today extends StatelessWidget {
               height: height(1, context),
               width: width(1, context),
               decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
-                )
-               
-                ),
-              child: FutureBuilder<Welcome>(
-                future: model.fetchCurrent(),
-                builder: (context, snapshot) {      
-     if (snapshot.hasData){ 
-                        
-                  return TodayWeather(todayModel: snapshot.data,);          
-     }
+                  image: DecorationImage(
+                image: AssetImage("assets/images/background.png"),
+                fit: BoxFit.cover,
+              )),
+              child: FutureBuilder<CurrentWeather>(
+                  future: model.fetchCurrent(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                            return TodayWeather(
+                              todayModel: snapshot.data,);
+                         
+                    } else if (snapshot.hasError) {
+                      return Center(
+                          child: Text(
+                        "An Error Occured",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ));
+                    }
 
-                  else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(
-                                "An Error Occured",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                              ));
-                            }
-                
-
-        
-               return     Center(
-                                child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator()));
-
-                }
-              ),
-            ), 
+                    return Center(
+                        child: Container(
+                            height: 50,
+                            width: 50,
+                            child: CircularProgressIndicator()));
+                  }),
+            ),
           );
-        }
-    );
+        });
   }
 }

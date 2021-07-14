@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/core/model/weather_model.dart';
+import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/utils/constants/colors.dart';
 import 'package:weather/utils/constants/screensizer.dart';
 import 'package:weather/utils/helpers.dart';
@@ -7,15 +7,17 @@ import 'package:weather_icons/weather_icons.dart';
 
 // ignore: must_be_immutable
 class TodayWeather extends StatelessWidget {
-  final Welcome todayModel;
+  final CurrentWeather todayModel;
   // final List<Weather> weather;
   TodayWeather({this.todayModel});
   DateTime date = formatTime(
       DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
+      
   @override
   // ignore: missing_return
   Widget build(BuildContext context) {
-    var value = todayModel.daily;
+    var uv = ((280 * todayModel.clouds.all * todayModel.sys.type)/25).toDouble();
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
         return Stack(
           children: [
             Container(
@@ -40,16 +42,14 @@ class TodayWeather extends StatelessWidget {
                                 TextStyle(fontSize: 20, color: AppColors.white),
                           ),
                           Text(
-                            '${formatDayMonth(DateTime.tryParse(((int.parse(value.map((e) => e.dt).toString()) + int.parse(todayModel.timezone)).toString() )))}',
+                            '${formatDayMonth(dateTime.toString() )}',
                             style:
                                 TextStyle(fontSize: 10, color: AppColors.white),
                           ),
                           SizedBox(
                             height: sizeBoxValue(context) * 2,
                           ),
-                          Text(
-                            value.map((e) => e.weather.map((e) => e.description))
-                                .toString(),
+                          Text( todayModel.weather.map((e) => e.description).toString(),
                             style:
                                 TextStyle(fontSize: 15, color: AppColors.white),
                           ),
@@ -57,8 +57,7 @@ class TodayWeather extends StatelessWidget {
                       ),
                       BoxedIcon(
                         WeatherIcons.fromString(
-                            todayModel.daily
-                                .map((e) => e.weather.map((e) => e.icon))
+                            todayModel.weather.map((e) => e.icon)
                                 .toString(),
                             fallback: WeatherIcons.na),
                         size: 60,
@@ -70,14 +69,7 @@ class TodayWeather extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
-                        Text(
-                            date.hour.toInt() < 12 
-                              ? todayModel.daily
-                                  .map((e) => e.temp.morn)
-                                  .toString()
-                              : todayModel.daily
-                                  .map((e) => e.temp.eve)
-                                  .toString(),
+                        Text(date.hour.toInt() < 12  ? todayModel.main.tempMin.toString() : todayModel.main.tempMax.toString(),
                           style:
                               TextStyle(fontSize: 40, color: AppColors.white),
                         ),
@@ -128,7 +120,7 @@ class TodayWeather extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                        '${ date.hour.toInt() < 12  ? todayModel.daily.map((e) => e.temp.morn).toString() : todayModel.daily.map((e) => e.temp.eve).toString()} °C',
+                                        '${todayModel.main.feelsLike.toString()} °C',
                                         style: TextStyle(
                                             fontSize: 15,
                                             color: AppColors.grey)),
@@ -161,7 +153,7 @@ class TodayWeather extends StatelessWidget {
                                       fontSize: 20, color: AppColors.grey),
                                 ),
                                 Text(
-                                    '${todayModel.daily.map((e) => e.humidity).toString()} %',
+                                    '${todayModel.main.humidity.toString()} %',
                                     style: TextStyle(
                                         fontSize: 15, color: AppColors.grey)),
                               ],
@@ -192,7 +184,7 @@ class TodayWeather extends StatelessWidget {
                                       fontSize: 20, color: AppColors.grey),
                                 ),
                                 Text(
-                                    '${todayModel.daily.map((e) => e.windSpeed).toString()} km/h',
+                                    '${todayModel.wind.speed.toString()} km/h',
                                     style: TextStyle(
                                         fontSize: 15, color: AppColors.grey)),
                               ],
@@ -218,7 +210,7 @@ class TodayWeather extends StatelessWidget {
                                       fontSize: 20, color: AppColors.grey),
                                 ),
                                 Text(
-                                    '${todayModel.daily.map((e) => e.uvi).toString()} ',
+                                    '${uv.toString()} ',
                                     style: TextStyle(
                                         fontSize: 15, color: AppColors.grey)),
                               ],

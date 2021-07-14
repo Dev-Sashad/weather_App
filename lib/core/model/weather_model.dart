@@ -1,11 +1,15 @@
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+WeatherData welcomeFromJson(String str) => WeatherData.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(WeatherData data) => json.encode(data.toJson());
 
-class Welcome {
-    Welcome({
+class WeatherData {
+    WeatherData({
         this.lat,
         this.lon,
         this.timezone,
@@ -19,9 +23,9 @@ class Welcome {
     int timezoneOffset;
     List<Daily> daily;
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-        lat: json["lat"]as double,
-        lon: json["lon"]as double,
+    factory WeatherData.fromJson(Map<String, dynamic> json) => WeatherData(
+        lat: json["lat"].toDouble(),
+        lon: json["lon"].toDouble(),
         timezone: json["timezone"],
         timezoneOffset: json["timezone_offset"],
         daily: List<Daily>.from(json["daily"].map((x) => Daily.fromJson(x))),
@@ -85,20 +89,20 @@ class Daily {
         sunset: json["sunset"],
         moonrise: json["moonrise"],
         moonset: json["moonset"],
-        moonPhase: json["moon_phase"]as double,
+        moonPhase: json["moon_phase"].toDouble(),
         temp: Temp.fromJson(json["temp"]),
         feelsLike: FeelsLike.fromJson(json["feels_like"]),
         pressure: json["pressure"],
         humidity: json["humidity"],
-        dewPoint: json["dew_point"]as double,
-        windSpeed: json["wind_speed"]as double,
+        dewPoint: json["dew_point"].toDouble(),
+        windSpeed: json["wind_speed"].toDouble(),
         windDeg: json["wind_deg"],
         windGust: json["wind_gust"].toDouble(),
         weather: List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
         clouds: json["clouds"],
-        pop: json["pop"]as double,
-        rain: json["rain"]as double,
-        uvi: json["uvi"]as double,
+        pop: json["pop"].toDouble(),
+        rain: json["rain"].toDouble(),
+        uvi: json["uvi"].toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -138,10 +142,10 @@ class FeelsLike {
     double morn;
 
     factory FeelsLike.fromJson(Map<String, dynamic> json) => FeelsLike(
-        day: json["day"]as double,
-        night: json["night"]as double,
-        eve: json["eve"]as double,
-        morn: json["morn"]as double,
+        day: json["day"].toDouble(),
+        night: json["night"].toDouble(),
+        eve: json["eve"].toDouble(),
+        morn: json["morn"].toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -170,12 +174,12 @@ class Temp {
     double morn;
 
     factory Temp.fromJson(Map<String, dynamic> json) => Temp(
-        day: json["day"]as double,
-        min: json["min"]as double,
-        max: json["max"]as double,
-        night: json["night"]as double,
-        eve: json["eve"]as double,
-        morn: json["morn"]as double,
+        day: json["day"].toDouble(),
+        min: json["min"].toDouble(),
+        max: json["max"].toDouble(),
+        night: json["night"].toDouble(),
+        eve: json["eve"].toDouble(),
+        morn: json["morn"].toDouble(),
     );
 
     Map<String, dynamic> toJson() => {

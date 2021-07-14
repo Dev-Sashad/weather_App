@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TabBarWidget extends StatelessWidget {
-  TabBarWidget(bool bool, {this.isSelected, this.item});
+  TabBarWidget(isSelected, this.item);
   bool isSelected;
   NavigationItem item;
   @override
