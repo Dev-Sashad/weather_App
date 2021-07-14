@@ -25,12 +25,15 @@ class Today extends StatelessWidget {
               child: FutureBuilder<CurrentWeather>(
                   future: model.fetchCurrent(),
                   builder: (context, snapshot) {
+                     print('data is processed');
                     if (snapshot.hasData) {
+                      print('data is true');
                             return TodayWeather(
                               todayModel: snapshot.data,);
                          
-                    } else if (snapshot.hasError) {
-                      return Center(
+                     } 
+                    else if (snapshot.hasError) {
+                      return Center( 
                           child: Text(
                         "An Error Occured",
                         style: TextStyle(

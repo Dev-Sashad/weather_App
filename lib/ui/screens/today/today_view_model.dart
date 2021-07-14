@@ -7,11 +7,11 @@ import 'package:weather/utils/locator.dart';
 
 class TodayViewModel extends BaseModel {
   
-  final WeatherApiService _movies= locator<WeatherApiService>();
+  final WeatherApiService _data= locator<WeatherApiService>();
   
    Future<CurrentWeather> fetchCurrent() async {
     //setBusy(true);
-    var result = await _movies.getCurrent();
+    var result = await _data.getCurrent();
     if (result is ErrorModel) {
       // showToast('Login failed');
       print(result.error);

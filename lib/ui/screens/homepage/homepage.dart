@@ -41,7 +41,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
           return Scaffold(
             key: _scaffoldKey,
             extendBodyBehindAppBar: true,
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             drawer: SideNavpage(),
             appBar: AppBar(
               elevation: 0.0,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather/core/model/error_model.dart';
-import 'package:weather/core/model/success_model.dart';
 
 handleResponse(http.Response response) {
   try {
@@ -10,7 +9,7 @@ handleResponse(http.Response response) {
     final int code = response.statusCode;
     final dynamic body = json.decode(response.body);
     if(code == 200 || code == 201) {
-      return SuccessModel(body);
+      return body;
     }
 
     return ErrorModel(body['message']);

@@ -8,12 +8,12 @@ import 'package:weather/utils/locator.dart';
 class WeeklyViewModel extends BaseModel {
   
 
-  final WeatherApiService _movies= locator<WeatherApiService>();
+  final WeatherApiService _data= locator<WeatherApiService>();
 
 
   Future<WeatherData> fetchData() async {
     //setBusy(true);
-    var result = await _movies.getData();
+    var result = await _data.getData();
     if (result is ErrorModel) {
       print(result.error);
       notifyListeners();
@@ -28,7 +28,7 @@ class WeeklyViewModel extends BaseModel {
 
    Future<CurrentWeather> fetchCurrent() async {
     //setBusy(true);
-    var result = await _movies.getCurrent();
+    var result = await _data.getCurrent();
     if (result is ErrorModel) {
       // showToast('Login failed');
       print(result.error);
