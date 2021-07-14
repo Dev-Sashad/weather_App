@@ -15,7 +15,7 @@ class HttpService {
     final response = await http
         .get(Uri.parse(url))
         .timeout(const Duration(seconds: 40));
-
+print(response.runtimeType);
     return handleResponse(response);
   }
 

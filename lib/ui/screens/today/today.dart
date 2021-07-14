@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
-import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/ui/widget/WeatherWidgets/today_weather.dart';
 import 'package:weather/utils/constants/screensizer.dart';
 import 'today_view_model.dart';
@@ -11,6 +10,9 @@ class Today extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<TodayViewModel>.withConsumer(
+      onModelReady: (v){
+        v.fetchCurrent();
+      },
         viewModelBuilder: () => TodayViewModel(),
         builder: (context, model, child) {
           return Scaffold(
@@ -22,33 +24,11 @@ class Today extends StatelessWidget {
                 image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover,
               )),
-              child: FutureBuilder<CurrentWeather>(
-                  future: model.fetchCurrent(),
-                  builder: (context, snapshot) {
-                     print('data is processed');
-                    if (snapshot.hasData) {
-                      print('data is true');
-                            return TodayWeather(
-                              todayModel: snapshot.data,);
-                         
-                     } 
-                    else if (snapshot.hasError) {
-                      return Center( 
-                          child: Text(
-                        "An Error Occured",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ));
-                    }
+              child:
+                             TodayWeather(
+                              todayModel:model.currentWeather)
 
-                    return Center(
-                        child: Container(
-                            height: 50,
-                            width: 50,
-                            child: CircularProgressIndicator()));
-                  }),
+
             ),
           );
         });

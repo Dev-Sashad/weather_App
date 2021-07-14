@@ -1,4 +1,3 @@
-
 import 'package:weather/core/model/baseModel.dart';
 import 'package:weather/core/model/error_model.dart';
 import 'package:weather/core/model/weather_model.dart';
@@ -23,7 +22,7 @@ class WeatherApiService extends BaseModel{
 
       }
 
-      var data = result; 
+      var data = result.data; 
      WeatherData  weatherList = WeatherData.fromJson(data);   
       return weatherList;
     } catch (e) {
@@ -46,7 +45,7 @@ class WeatherApiService extends BaseModel{
       }
 
       var data = result; 
-      WeatherData  weatherList = WeatherData.fromJson(data);   
+      WeatherData  weatherList = WeatherData .fromJson(data);   
       return weatherList;
     } catch (e) {
       print(e.toString());
