@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/utils/constants/colors.dart';
 import 'package:weather/utils/constants/screensizer.dart';
+import 'package:weather/utils/helpers.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +16,7 @@ class TodayWeather extends StatelessWidget {
   @override
   // ignore: missing_return
   Widget build(BuildContext context) {
-    var uv = ((280 * todayModel.clouds.all * todayModel.sys.type)/25).ceil();
+    // var uv = ((280 * todayModel.clouds.all * todayModel.sys.type)/25).ceil();
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
         return Stack(
           children: [
@@ -40,11 +41,11 @@ class TodayWeather extends StatelessWidget {
                             style:
                                 TextStyle(fontSize: 20, color: AppColors.white),
                           ),
-                          // Text(
-                          //   '${formatDayMonth(dateTime.toString() )}',
-                          //   style:
-                          //       TextStyle(fontSize: 10, color: AppColors.white),
-                          // ),
+                          Text(
+                            '${formatDayMonth(dateTime.toString() )}',
+                            style:
+                                TextStyle(fontSize: 10, color: AppColors.white),
+                          ),
                           SizedBox(
                             height: sizeBoxValue(context) * 2,
                           ),
@@ -208,7 +209,7 @@ class TodayWeather extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20, color: AppColors.grey),
                                 ),
-                                Text(uv.toString(),
+                                Text('',
                                     style: TextStyle(
                                         fontSize: 15, color: AppColors.grey)),
                               ],
