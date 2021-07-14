@@ -1,0 +1,4 @@
+enum MessageType {
+  sender,
+  receiver
+}

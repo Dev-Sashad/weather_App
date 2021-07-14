@@ -1,0 +1,37 @@
+name: weather
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+
+  get_it: ^3.0.0+1
+  provider:
+  http:
+  intl: ^0.17.0
+  ars_progress_dialog: ^0.1.2
+  shared_preferences:
+  fluttertoast: ^7.1.6
+  provider_architecture: ^1.0.3
+  google_fonts:
+  animated_splash_screen: ^1.1.0
+  weather_icons: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Caros
+      fonts:
+        - asset: assets/fonts/caros.otf
