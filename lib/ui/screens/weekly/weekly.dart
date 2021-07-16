@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
-import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/core/model/weather_model.dart';
 import 'package:weather/ui/widget/WeatherWidgets/weekly_weather.dart';
 import 'package:weather/utils/constants/screensizer.dart';
@@ -35,7 +34,7 @@ class Weekly extends StatelessWidget {
                                         child: ListView(
                                 shrinkWrap: true,
                                 children: model.dailyData
-                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed))
+                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed, weatherData:model.weatherData,))
                                     .toList()));
                             } else if (snapshot.hasError) {
                               return Center(

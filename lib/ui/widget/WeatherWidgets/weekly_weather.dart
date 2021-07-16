@@ -81,7 +81,8 @@ class WeeklyWeather extends StatelessWidget {
 // ignore: must_be_immutable
 class WeeklyWeatherTile extends StatelessWidget {
   final Daily weeklyModel;
-  WeeklyWeatherTile({this.weeklyModel});
+  final WeatherData weatherData;
+  WeeklyWeatherTile({this.weeklyModel, this.weatherData});
   // DateTime date = formatTime(
   //     DateTime.now().subtract(Duration(hours: 24, minutes: 00, seconds: 00)));
   @override

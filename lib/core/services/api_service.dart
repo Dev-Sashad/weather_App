@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:weather/core/model/baseModel.dart';
 import 'package:weather/core/model/current_weather.dart';
@@ -32,10 +31,8 @@ class WeatherApiService extends BaseModel {
         WeatherData postList = WeatherData.fromJson(data);
         return ErrorModel(postList);
       }
-      print('goooal');
-      var data = json.decode(result.data);
-      WeatherData weatherList = WeatherData.fromJson(data);
-      return weatherList;
+     print('goooooal');
+      return SuccessModel(result);
     } catch (e) {
       print(e.toString());
       return ErrorModel('$e');
@@ -55,10 +52,9 @@ class WeatherApiService extends BaseModel {
        CurrentWeather postList = CurrentWeather.fromJson(data);
         return ErrorModel(postList);
       }
-        var data = json.decode(result.data);
 
-        print('goooooal');
-        return SuccessModel(result.data);
+      print('goooooal');
+      return SuccessModel(result);
        } catch (e) {
       print(e.toString());
       return ErrorModel('$e');

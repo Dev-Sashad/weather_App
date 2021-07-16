@@ -14,9 +14,10 @@ class WeeklyViewModel extends BaseModel {
   final WeatherApiService _data= locator<WeatherApiService>();
 
   CurrentWeather currentWeather;
+  WeatherData weatherData;
   List<Daily> dailyData;
 
-  fetchCurrent() async {
+    fetchCurrent() async {
      //setBusy(true);
      var result = await _data.getCurrent();
      if (result is ErrorModel) {
@@ -27,17 +28,22 @@ class WeeklyViewModel extends BaseModel {
        throw Exception('Failed to load internet');
        //return ErrorModel(result.error);
      }
-     if (result is SuccessModel) {
-       print('ASASAS');
-       print(json.decode(result.data));
-       CurrentWeather weatherList = CurrentWeather.fromJson(json.decode(result.data));
-       currentWeather = weatherList;
+     
+      if (result is SuccessModel) {
+       print('GOOOOOOD');
+      var data = json.decode(result.data); 
+      print(json.decode(result.data));
+      CurrentWeather weatherList = CurrentWeather.fromJson(data);  
+       currentWeather = weatherList ;
+       notifyListeners();
        print(weatherList);
        return weatherList;
-     }
-  }
 
-  Future<List<Daily>> fetchData() async {
+   }
+   }
+
+
+  Future<List<Daily>>fetchData() async {
  //setBusy(true);
      var result = await _data.getData();
      if (result is ErrorModel) {
@@ -50,17 +56,19 @@ class WeeklyViewModel extends BaseModel {
      }
     
     if (result is SuccessModel) {
-      
-       print('ASASAS');
-       print(json.decode(result.data));
-       var data = result.data["results"];
-       List<Daily> weatherList = List<Daily>.from(
-          data.map((item) => Daily.fromJson(item)));
-       dailyData = weatherList;
+       print('WORKKING');
+      var data = json.decode(result.data); 
+      print(json.decode(result.data));
+      WeatherData weatherList = WeatherData.fromJson(data);  
+       weatherData = weatherList ;
+       notifyListeners();
+     var _daily = json.decode(result.data["daily"]);
+     List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item))); 
+       dailyData = dailyList ;
+       notifyListeners();
        print(weatherList);
-       return weatherList;
-    }
-     
-  }
-   
+       return dailyList;
+
+   }     
+  }  
 }

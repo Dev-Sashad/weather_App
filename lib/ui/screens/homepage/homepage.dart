@@ -41,7 +41,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
           return Scaffold(
             key: _scaffoldKey,
             extendBodyBehindAppBar: true,
-            resizeToAvoidBottomInset: true,
+            extendBody: true,
             drawer: SideNavpage(),
             appBar: AppBar(
               elevation: 0.0,
@@ -55,7 +55,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
             ),
       bottomNavigationBar: new Material(
         elevation: 0.0,
-        color: AppColors.grey,
+        color: Colors.grey[50],
         child: TabBar(
           indicatorWeight: 1.0 ,
           indicatorColor: Colors.transparent,
@@ -83,7 +83,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
                 onTap: (){
 
                 },
-              )
+              ),
           ]
           ),
    );
@@ -97,7 +97,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(icon: Icon(item.icon, size: 30,color: isSelected? Colors.blue: Colors.black,),
+        IconButton(icon: Icon(item.icon, size: 25,color: isSelected? Colors.blue: Colors.black,),
                            onPressed: (){}),
        
         Text(
