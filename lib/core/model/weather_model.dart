@@ -2,12 +2,6 @@
 //
 //     final welcome = welcomeFromJson(jsonString);
 
-import 'dart:convert';
-
-WeatherData welcomeFromJson(String str) => WeatherData.fromJson(json.decode(str));
-
-String welcomeToJson(WeatherData data) => json.encode(data.toJson());
-
 class WeatherData {
     WeatherData({
         this.lat,

@@ -12,4 +12,7 @@ class HomepageViewModel extends BaseModel {
 //     notifyListeners();
 //   }
   
+  // newTab (int value, TabController tabController){
+  //   return tabController.animateTo(value);
+  // }
 }

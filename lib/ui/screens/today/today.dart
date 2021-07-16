@@ -24,7 +24,8 @@ class Today extends StatelessWidget {
                 image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover,
               )),
-              child: FutureBuilder(
+              child:
+               FutureBuilder(
                 future: model.fetchCurrent(),
                 builder: (context, snapshot) {
                   if(!snapshot.hasData){
@@ -46,11 +47,10 @@ class Today extends StatelessWidget {
                                     fontSize: 25),
                               ));
                             }
-                  return TodayWeather(todayModel: model.currentWeather);
+                  return 
+                  TodayWeather(todayModel: model.currentWeather);
                 }
               )
-
-
             ),
           );
         });

@@ -62,9 +62,9 @@ class WeeklyViewModel extends BaseModel {
       WeatherData weatherList = WeatherData.fromJson(data);  
        weatherData = weatherList ;
 
-      var _daily = json.decode(result.data["daily"]); 
-      List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item))); 
-       dailyData = dailyList ;
+      // var _daily = data.data["daily"]; 
+      // List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item))); 
+      //  dailyData = dailyList ;
        notifyListeners();
        print(weatherList);
        return weatherList;

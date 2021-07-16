@@ -99,7 +99,15 @@ class WeeklyWeatherTile extends StatelessWidget {
         height: 60,
         width: width(1, context),
         padding: EdgeInsets.all(20),
-        color: AppColors.white,
+        decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 4,
+            color: Colors.black12
+          )
+        ]
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -15,6 +15,10 @@ class TodayViewModel extends BaseModel {
   CurrentWeather currentWeather;
   List<Weather> weather;
 
+  //  delay()async{
+  //  await Future.delayed(Duration(milliseconds: 200));
+  // }
+
   fetchCurrent() async {
      //setBusy(true);
      var result = await _data.getCurrent();
