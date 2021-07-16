@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Movie App',
+      title: 'Weather App',
       debugShowCheckedModeBanner: false,
       builder: (context, child) =>  Navigator(
         key: locator<ProgressService>().progressNavigationKey,

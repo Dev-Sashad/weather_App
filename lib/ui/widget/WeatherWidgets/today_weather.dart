@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:weather/core/model/current_weather.dart';
 import 'package:weather/utils/constants/colors.dart';
 import 'package:weather/utils/constants/screensizer.dart';
+import 'package:weather/utils/helpers.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 // ignore: must_be_immutable
 class TodayWeather extends StatelessWidget {
   final CurrentWeather todayModel;
-  // final List<Weather> weather;
-  TodayWeather({this.todayModel});
+  final Weather description;
+  TodayWeather({this.todayModel, this.description});
   @override
   Widget build(BuildContext context) {
-    // DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000);
+    var uv = (280*todayModel.clouds.all*1.06)/(25*100);
         return Stack(
           children: [
             Container(
@@ -21,56 +23,56 @@ class TodayWeather extends StatelessWidget {
               color: Colors.transparent,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                    height: sizeBoxValue(context) * 2,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'New Delhi',
                             style:
-                                TextStyle(fontSize: 20, color: AppColors.white),
+                                TextStyle(fontSize: 30, color: AppColors.white),
                           ),
-                          // Text(
-                          //   formatDayMonth(DateTime.fromMillisecondsSinceEpoch(todayModel.dt * 1000)).toString(),
-                          //   style:
-                          //       TextStyle(fontSize: 10, color: AppColors.white),
-                          // ),
+                          Text(
+                            formatDayMonth(dateTime).toString(),
+                            style:
+                                TextStyle(fontSize: 15, color: AppColors.white),
+                          ),
                           SizedBox(
                             height: sizeBoxValue(context) * 2,
                           ),
-                          // Text( todayModel.weather.map((e) => e.description).toString(),
-                          //   style:
-                          //       TextStyle(fontSize: 15, color: AppColors.white),
-                          // ),
+                          Text( todayModel.weather.map((e) => e.description).toString(),
+                            style:
+                                TextStyle(fontSize: 15, color: AppColors.white),
+                          ),
                         ],
                       ),
-                      // BoxedIcon(
-                      //   WeatherIcons.fromString(
-                      //       todayModel.weather.map((e) => e.icon)
-                      //           .toString(),
-                      //       fallback: WeatherIcons.na),
-                      //   size: 60,
-                      //   color: AppColors.white,
-                      // ),
+                      BoxedIcon(
+                        WeatherIcons.fromString(
+                            todayModel.weather.map((e) => e.icon)
+                                .toString(),
+                            fallback: WeatherIcons.na),
+                        size: 60,
+                        color: AppColors.white,
+                      ),
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 10),
                     child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Text( todayModel.main.tempMax.toString(),
-                        //   style:
-                        //       TextStyle(fontSize: 40, color: AppColors.white),
-                        // ),
+                        Text( todayModel.main.tempMax.toString(),
+                          style:
+                              TextStyle(fontSize: 80, color: AppColors.white),
+                        ),
                         Text(
                           '°C',
                           style:
-                              TextStyle(fontSize: 15, color: AppColors.white),
+                              TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: AppColors.white),
                         ),
                       ],
                     ),
@@ -86,7 +88,7 @@ class TodayWeather extends StatelessWidget {
                 width: width(1, context),
                 color: AppColors.white,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -113,11 +115,12 @@ class TodayWeather extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // Text(
-                                    //     '${todayModel.main.feelsLike.toString()} °C',
-                                    //     style: TextStyle(
-                                    //         fontSize: 15,
-                                    //         color: AppColors.grey)),
+                                    Text(
+                                        '${todayModel.main.feelsLike.toString()} °C',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: AppColors.grey)),
+                                      SizedBox(width:10),
                                     Text('Today',
                                         style: TextStyle(
                                             fontSize: 15,
@@ -134,7 +137,7 @@ class TodayWeather extends StatelessWidget {
                           children: [
                             BoxedIcon(
                               WeatherIcons.raindrops,
-                              size: 30,
+                              size: 50,
                               color: AppColors.grey,
                             ),
                             SizedBox(
@@ -148,10 +151,10 @@ class TodayWeather extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20, color: AppColors.grey),
                                 ),
-                                // Text(
-                                //     '${todayModel.main.humidity.toString()} %',
-                                //     style: TextStyle(
-                                //         fontSize: 15, color: AppColors.grey)),
+                                Text(
+                                    '${todayModel.main.humidity.toString()} %',
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppColors.grey)),
                               ],
                             )
                           ],
@@ -159,10 +162,11 @@ class TodayWeather extends StatelessWidget {
                       ],
                     ),
 
-                     SizedBox(height:MediaQuery.of(context).size.height*0.05,),
+                     SizedBox(height:MediaQuery.of(context).size.height*0.03,),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,10 +187,10 @@ class TodayWeather extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20, color: AppColors.grey),
                                 ),
-                                // Text(
-                                //     '${todayModel.wind.speed.toString()} km/h',
-                                //     style: TextStyle(
-                                //         fontSize: 15, color: AppColors.grey)),
+                                Text(
+                                    '${todayModel.wind.speed.toString()} km/h',
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppColors.grey)),
                               ],
                             )
                           ],
@@ -210,7 +214,7 @@ class TodayWeather extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20, color: AppColors.grey),
                                 ),
-                                Text('',
+                                Text('${uv.toStringAsFixed(2)}',
                                     style: TextStyle(
                                         fontSize: 15, color: AppColors.grey)),
                               ],

@@ -22,21 +22,32 @@ class Weekly extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.indigo[900]),
                   child: Stack(
                     children: [
-                      WeeklyWeather(weeklyModel: model.currentWeather),
+                      FutureBuilder(
+                        future: model.fetchCurrent(),
+                        builder: (context, snapshot) {
+                              if  (!snapshot.hasData) {
+                                   return Center(
+                                child: Container(
+                                   ));
+                            }
+                          return 
+                          WeeklyWeather(weeklyModel: model.currentWeather);
+                        }
+                      ),
 
-                      FutureBuilder<List<Daily>>(
+                      FutureBuilder(
                           future: model.fetchData(),
                           builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                             
-                                    return Positioned(
-                                        top: height(0.65, context),
-                                        child: ListView(
-                                shrinkWrap: true,
-                                children: model.dailyData
-                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed, weatherData:model.weatherData,))
-                                    .toList()));
-                            } else if (snapshot.hasError) {
+                            if  (!snapshot.hasData) {
+                                   return Center(
+                                child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                    )));
+                            }
+                                else if (snapshot.hasError) {
                               return Center(
                                   child: Text(
                                 "An Error Occured",
@@ -47,13 +58,15 @@ class Weekly extends StatelessWidget {
                               ));
                             }
 
-                            return Center(
-                                child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                    )));
+                                    return Positioned(
+                                        top: height(0.65, context),
+                                        child: ListView(
+                               children: model.dailyData
+                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed, weatherData:model.weatherData,)).toList()
+                                
+                                        )
+                                    );
+                           
                           })
                     ],
                   )));

@@ -46,10 +46,10 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
             appBar: AppBar(
               elevation: 0.0,
               backgroundColor: Colors.transparent,
-              leading: IconButton(icon: Icon(Icons.menu, size: 30, color: AppColors.grey,),
+              leading: IconButton(icon: Icon(Icons.menu, size: 30, color: Colors.grey[50],),
                            onPressed: (){ _scaffoldKey.currentState.openDrawer();}),
               actions: [
-                  IconButton(icon: Icon(Icons.search, size: 30,color: AppColors.grey,),
+                  IconButton(icon: Icon(Icons.search, size: 30,color: Colors.grey[50],),
                            onPressed: (){})
               ],
             ),

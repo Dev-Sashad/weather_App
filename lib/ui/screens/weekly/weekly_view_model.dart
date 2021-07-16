@@ -29,7 +29,7 @@ class WeeklyViewModel extends BaseModel {
        //return ErrorModel(result.error);
      }
      
-      if (result is SuccessModel) {
+      // if (result is SuccessModel) {
        print('GOOOOOOD');
       var data = json.decode(result.data); 
       print(json.decode(result.data));
@@ -39,11 +39,11 @@ class WeeklyViewModel extends BaseModel {
        print(weatherList);
        return weatherList;
 
-   }
+  //  }
    }
 
 
-  Future<List<Daily>>fetchData() async {
+  fetchData() async {
  //setBusy(true);
      var result = await _data.getData();
      if (result is ErrorModel) {
@@ -55,20 +55,20 @@ class WeeklyViewModel extends BaseModel {
        //return ErrorModel(result.error);
      }
     
-    if (result is SuccessModel) {
+    // if (result is SuccessModel) {
        print('WORKKING');
       var data = json.decode(result.data); 
       print(json.decode(result.data));
       WeatherData weatherList = WeatherData.fromJson(data);  
        weatherData = weatherList ;
-       notifyListeners();
-     var _daily = json.decode(result.data["daily"]);
-     List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item))); 
+
+      var _daily = json.decode(result.data["daily"]); 
+      List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item))); 
        dailyData = dailyList ;
        notifyListeners();
        print(weatherList);
-       return dailyList;
+       return weatherList;
 
-   }     
+  //  }     
   }  
 }

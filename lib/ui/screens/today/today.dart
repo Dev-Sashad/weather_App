@@ -24,7 +24,31 @@ class Today extends StatelessWidget {
                 image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover,
               )),
-              child: TodayWeather(todayModel: model.currentWeather)
+              child: FutureBuilder(
+                future: model.fetchCurrent(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData){
+                    return Center(
+                                child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                    )));
+                  }
+                       else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text(
+                                "An Error Occured",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                              ));
+                            }
+                  return TodayWeather(todayModel: model.currentWeather);
+                }
+              )
 
 
             ),

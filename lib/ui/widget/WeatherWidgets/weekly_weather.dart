@@ -17,64 +17,69 @@ class WeeklyWeather extends StatelessWidget {
     DateTime dateTime =
         DateTime.fromMillisecondsSinceEpoch(weeklyModel.dt * 1000);
     return Container(
-      height: height(0.35, context),
-      width: width(1, context),
-      padding: EdgeInsets.all(20),
-      color: Colors.transparent,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: sizeBoxValue(context) * 2,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+              height: height(0.35, context),
+              width: width(1, context),
+              padding: EdgeInsets.fromLTRB(20, 100, 0,0),
+              color: Colors.transparent,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    'New Delhi',
-                    style: TextStyle(fontSize: 20, color: AppColors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'New Delhi',
+                            style:
+                                TextStyle(fontSize: 30, color: AppColors.white),
+                          ),
+                          Text(
+                            formatDayMonth(dateTime).toString(),
+                            style:
+                                TextStyle(fontSize: 15, color: AppColors.white),
+                          ),
+                          SizedBox(
+                            height: sizeBoxValue(context) * 2,
+                          ),
+                          Text( weeklyModel.weather.map((e) => e.description).toString(),
+                            style:
+                                TextStyle(fontSize: 15, color: AppColors.white),
+                          ),
+                        ],
+                      ),
+                      BoxedIcon(
+                        WeatherIcons.fromString(
+                            weeklyModel.weather.map((e) => e.icon)
+                                .toString(),
+                            fallback: WeatherIcons.na),
+                        size: 60,
+                        color: AppColors.white,
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${formatDayMonth(dateTime)}',
-                    style: TextStyle(fontSize: 10, color: AppColors.white),
-                  ),
-                  SizedBox(
-                    height: sizeBoxValue(context) * 2,
-                  ),
-                  Text(
-                    weeklyModel.weather.map((e) => e.description).toString(),
-                    style: TextStyle(fontSize: 15, color: AppColors.white),
-                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text( weeklyModel.main.tempMax.toString(),
+                          style:
+                              TextStyle(fontSize: 50, color: AppColors.white),
+                        ),
+                        Text(
+                          '°C',
+                          style:
+                              TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: AppColors.white),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-              BoxedIcon(
-                WeatherIcons.fromString(
-                    weeklyModel.weather.map((e) => e.icon).toString(),
-                    fallback: WeatherIcons.na),
-                size: 30,
-                color: AppColors.white,
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Row(
-              children: [
-                Text( weeklyModel.main.tempMax.toString(),
-                  style: TextStyle(fontSize: 40, color: AppColors.white),
-                ),
-                Text(
-                  '°C',
-                  style: TextStyle(fontSize: 15, color: AppColors.white),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+            );
   }
 }
 

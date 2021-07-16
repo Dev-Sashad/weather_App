@@ -10,7 +10,7 @@ class SideNavpage extends StatelessWidget {
               child: SafeArea(
                 child: Container(
                     padding: EdgeInsets.fromLTRB(5, 50, 0, 0),
-                    color: AppColors.primaryColor,
+                    color: AppColors.blackShade1,
                              
                     ),
               ),

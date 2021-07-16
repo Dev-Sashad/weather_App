@@ -13,6 +13,7 @@ class TodayViewModel extends BaseModel {
   final WeatherApiService _data= locator<WeatherApiService>();
   
   CurrentWeather currentWeather;
+  List<Weather> weather;
 
   fetchCurrent() async {
      //setBusy(true);
@@ -21,12 +22,12 @@ class TodayViewModel extends BaseModel {
        print('ERROR:::::::');
        // showToast('Login failed');
        print(result.error);
-       notifyListeners();
+      //  notifyListeners();
        throw Exception('Failed to load internet');
        //return ErrorModel(result.error);
      }
       
-    if (result is SuccessModel) {
+    // if (result is SuccessModel) {
        print('ASASAS');
       var data = json.decode(result.data); 
       print(json.decode(result.data));
@@ -36,6 +37,6 @@ class TodayViewModel extends BaseModel {
        print(weatherList);
        return weatherList;
 
-   }
+  //  }
   }
 }
