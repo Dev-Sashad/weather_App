@@ -30,10 +30,11 @@ class _ProgressManagerState extends State<ProgressManager> {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
+        loadingWidget: Center(child:CircularProgressIndicator( backgroundColor:Colors.white, strokeWidth:3,)),
         dismissable: false,
-        backgroundColor: Color(0x33000000),
+        backgroundColor: Colors.transparent,
         animationDuration: Duration(milliseconds: 500));
-
+        
     // pr.show();
     progressDialog.show(); // show dialog
     //progressDialog.dismiss();

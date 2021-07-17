@@ -60,6 +60,10 @@ formatTime(value) {
   return df.format(value);
 }
 
+formatHour(value) {
+  final df = new DateFormat('hh');
+  return df.format(value);
+}
 
 
 class Status {

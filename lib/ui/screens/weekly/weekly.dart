@@ -8,11 +8,12 @@ class Weekly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<WeeklyViewModel>.withConsumer(
-      onModelReady: (v){
-        v.fetchCurrent();
-        v.fetchData();
-      },
+        onModelReady: (v) {
+          v.fetchCurrent();
+          v.fetchData();
+        },
         viewModelBuilder: () => WeeklyViewModel(),
+       
         builder: (context, model, child) {
           return Scaffold(
               body: Container(
@@ -21,56 +22,20 @@ class Weekly extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.indigo[900]),
                   child: Stack(
                     children: [
-                      FutureBuilder(
-                        future: model.fetchCurrent(),
-                        builder: (context, snapshot) {
-                              if  (!snapshot.hasData) {
-                                   return Center(
-                                child: Container(
-                                   ));
-                            }
-                          return 
-                          WeeklyWeather(weeklyModel: model.currentWeather);
-                        }
-                      ),
-
-                      FutureBuilder(
-                          future: model.fetchData(),
-                          builder: (context, snapshot) {
-                            if  (!snapshot.hasData) {
-                                   return Center(
-                                child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                    )));
-                            }
-                                else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(
-                                "An Error Occured",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                              ));
-                            }
-
-                                    return Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Container(
-                                            height: MediaQuery.of(context).size.height*0.65,
-                                            color: Colors.white,
-                                            child: ListView(
-                               children: model.weatherData.daily
-                                    .map((feed) => WeeklyWeatherTile(weeklyModel: feed, weatherData:model.weatherData,)).toList()
-                                
-                                            ),
-                                          ),
-                                    );
-                           
-                          })
+                      WeeklyWeather(weeklyModel: model.currentWeather),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          child: ListView(
+                              children: model.weatherData.daily
+                                  .map((feed) => WeeklyWeatherTile(
+                                        weeklyModel: feed,
+                                        weatherData: model.weatherData,
+                                      ))
+                                  .toList()),
+                        ),
+                      )
                     ],
                   )));
         });

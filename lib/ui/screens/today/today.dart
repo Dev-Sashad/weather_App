@@ -6,52 +6,26 @@ import 'today_view_model.dart';
 
 class Today extends StatelessWidget {
   // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<TodayViewModel>.withConsumer(
-      onModelReady: (v){
-        v.fetchCurrent();
-      },
+        onModelReady: (v) {
+          v.fetchCurrent();
+        },
         viewModelBuilder: () => TodayViewModel(),
         builder: (context, model, child) {
           return Scaffold(
             body: Container(
-              height: height(1, context),
-              width: width(1, context),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.cover,
-              )),
-              child:
-               FutureBuilder(
-                future: model.fetchCurrent(),
-                builder: (context, snapshot) {
-                  if(!snapshot.hasData){
-                    return Center(
-                                child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                    )));
-                  }
-                       else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(
-                                "An Error Occured",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                              ));
-                            }
-                  return 
-                  TodayWeather(todayModel: model.currentWeather);
-                }
-              )
-            ),
+                height: height(1, context),
+                width: width(1, context),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover,
+                )),
+                child:  TodayWeather(todayModel: model.currentWeather)
+               
+            )
           );
         });
   }
