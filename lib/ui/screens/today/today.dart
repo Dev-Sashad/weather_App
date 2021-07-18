@@ -15,18 +15,22 @@ class Today extends StatelessWidget {
         viewModelBuilder: () => TodayViewModel(),
         builder: (context, model, child) {
           return Scaffold(
-            body: Container(
-                height: height(1, context),
-                width: width(1, context),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage("assets/images/background.png"),
-                  fit: BoxFit.cover,
-                )),
-                child:  TodayWeather(todayModel: model.currentWeather)
-               
-            )
-          );
+                  body:  model.busy
+              ? Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                    strokeWidth: 3,
+                  ),
+                )
+              :  Container(
+                      height: height(1, context),
+                      width: width(1, context),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage("assets/images/background.png"),
+                        fit: BoxFit.cover,
+                      )),
+                      child: TodayWeather(todayModel: model.currentWeather)));
         });
   }
 }

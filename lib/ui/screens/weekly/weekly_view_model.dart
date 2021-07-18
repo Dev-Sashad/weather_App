@@ -13,8 +13,8 @@ class WeeklyViewModel extends BaseModel {
   WeatherData weatherData;
   List<Daily> dailyData;
 
-  fetchCurrent() async {
-    //setBusy(true);
+  fetchData() async {
+    setBusy(true);
     var result = await _data.getCurrent();
     if (result is ErrorModel) {
       print('ERROR:::::::');
@@ -33,18 +33,14 @@ class WeeklyViewModel extends BaseModel {
     currentWeather = weatherList;
     notifyListeners();
     print(weatherList);
-    return weatherList;
 
-    //  }
-  }
-
-  fetchData() async {
-    //setBusy(true);
-    var result = await _data.getData();
-    if (result is ErrorModel) {
+    ///////////////
+    
+    var dailyResult = await _data.getData();
+    if (dailyResult is ErrorModel) {
       print('ERROR:::::::');
       // showToast('Login failed');
-      print(result.error);
+      print(dailyResult.error);
       notifyListeners();
       throw Exception('Failed to load internet');
       //return ErrorModel(result.error);
@@ -52,18 +48,17 @@ class WeeklyViewModel extends BaseModel {
 
     // if (result is SuccessModel) {
     print('WORKKING');
-    var data = json.decode(result.data);
-    print(json.decode(result.data));
-    WeatherData weatherList = WeatherData.fromJson(data);
-    weatherData = weatherList;
+    var daily = json.decode(dailyResult.data);
+     print(json.decode(dailyResult.data));
+    WeatherData dailyList = WeatherData.fromJson(daily);
+    weatherData = dailyList;
 
     // var _daily = data.data["daily"];
     // List<Daily> dailyList = List<Daily>.from(_daily.map((item) => Daily.fromJson(item)));
     //  dailyData = dailyList ;
     notifyListeners();
-    print(weatherList);
-    return weatherList;
-
-    //  }
+    print(dailyList);
+    setBusy(false);
+    
+     }
   }
-}

@@ -114,7 +114,7 @@ class WeeklyWeatherTile extends StatelessWidget {
             boxShadow: [BoxShadow(blurRadius: 6, color: Colors.black12)]),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //  BoxedIcon(
             //             WeatherIcons.fromString((int.parse(hour) > 6 && int.parse(hour) < 19) ?"wi-day-"+weeklyModel.weather[0].description.toString():
@@ -123,36 +123,25 @@ class WeeklyWeatherTile extends StatelessWidget {
             //             size: 10,
             //             color: AppColors.white,
             //           ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.network(
-                  iconUrl,
-                  color: AppColors.grey,
-                ),
-                SizedBox(
-                  width: sizeBoxValue(context) * 2,
-                ),
-                Text('${formatDay(dateTime).toString().substring(0, 3)}',
-                    style: TextStyle(fontSize: 15, color: AppColors.grey)),
-              ],
+            Image.network(
+              iconUrl,
+              color: AppColors.grey,
+            ),
+           
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text('${formatDay(dateTime).toString().substring(0, 3)}',
+                  style: TextStyle(fontSize: 15, color: AppColors.grey)),
             ),
 
-            SizedBox(
-              width: sizeBoxValue(context) * 3,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                    '${weeklyModel.temp.morn.toString()} °/° ${weeklyModel.temp.eve.toString()}',
-                    style: TextStyle(fontSize: 15, color: AppColors.grey)),
-                SizedBox(
-                  width: sizeBoxValue(context) * 2,
-                ),
-                Text('${weeklyModel.weather[0].description.toString()}',
-                    style: TextStyle(fontSize: 15, color: AppColors.grey))
-              ],
+           
+            Text(
+                '${weeklyModel.temp.morn.toString()} °/° ${weeklyModel.temp.eve.toString()}',
+                style: TextStyle(fontSize: 15, color: AppColors.grey)),
+            
+            Container(
+              child: Text('${weeklyModel.weather[0].description.toString()}',
+                  style: TextStyle(fontSize: 15, color: AppColors.grey)),
             ),
           ],
         ));

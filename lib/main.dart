@@ -15,7 +15,7 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget  {
   @override
   _MyAppState createState() => _MyAppState();
 }

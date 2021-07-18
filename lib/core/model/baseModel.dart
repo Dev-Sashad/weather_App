@@ -9,19 +9,12 @@ class BaseModel extends ChangeNotifier {
   String lat = '28.644800';
   String lon = '77.216721';
   String state= 'new delhi';
+
   bool _busy = false;
   bool get busy => _busy;
+  
   void setBusy(bool value) {
     _busy = value;
     notifyListeners();
-    if(value == true){
-      _dialogService.showDialog();
-    }else
-    {
-      _dialogService.dialogComplete(response);
-    }
   }
-
-
-
 }

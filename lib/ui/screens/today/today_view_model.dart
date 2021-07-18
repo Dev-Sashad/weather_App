@@ -18,7 +18,7 @@ class TodayViewModel extends BaseModel {
   }
 
   fetchCurrent() async {
-    //setBusy(true);
+    setBusy(true);
     var result = await _data.getCurrent();
     if (result is ErrorModel) {
       print('ERROR:::::::');
@@ -37,8 +37,9 @@ class TodayViewModel extends BaseModel {
     currentWeather = weatherList;
     notifyListeners();
     print(weatherList);
+    setBusy(false);
     return weatherList;
-
+    
     //  }
   }
 }

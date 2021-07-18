@@ -9,14 +9,20 @@ class Weekly extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelProvider<WeeklyViewModel>.withConsumer(
         onModelReady: (v) {
-          v.fetchCurrent();
           v.fetchData();
         },
         viewModelBuilder: () => WeeklyViewModel(),
        
         builder: (context, model, child) {
           return Scaffold(
-              body: Container(
+              body:  model.busy
+              ? Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                    strokeWidth: 3,
+                  ),
+                )
+              : Container(
                   height: height(1, context),
                   width: width(1, context),
                   decoration: BoxDecoration(color: Colors.indigo[900]),
